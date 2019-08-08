@@ -1,0 +1,216 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+    char user [20],pass[4],status;
+	int balik;
+	int a, b, c, d, e, f, j, k, i , l, m, n, o;
+	int pil;
+	int tg,tgll;
+
+	struct buku{
+		int kodeB;
+		char judul[100];
+		int stock;
+	}z[100];
+
+	struct daftar{
+		int kodeP;
+		char nama[50];
+		char tlp[20];
+	} y[100];
+
+	struct pinjam{
+		int kp;
+		int kb;
+		int noPinjam;
+		int tglP;
+	} x[100];
+
+	void menu();
+	void input();
+	void book();
+	void daf();
+	void data();
+	void pjm();
+	void bali();
+	void tanggal();
+	void denda();
+	void tglbalik();
+
+
+int main()
+{
+    menu();
+
+}
+void menu()
+{
+	cout<<" \t\tPilihan Menu Peminjaman\n";
+	cout<<" 1. Input Data Buku\n";
+	cout<<" 2. Daftar Buku \n";
+	cout<<" 3. Pendaftaran Anggota\n";
+	cout<<" 4. Data Anggota\n";
+	cout<<" 5. Peminjaman Buku\n";
+	cout<<" 6. Pengembalian Buku\n";
+	cout<<" 7. Keluar\n";
+	cout<<" Masukan Pilihan Anda : "; cin>>pil;
+	system("cls");
+    switch(pil){
+	case 1:
+		input();
+		break;
+	case 2:
+		book();
+		break;
+    case 3:
+        daf();
+        break;
+     case 4:
+        data();
+        break;
+    case 5:
+        pjm();
+        break;
+    case 6:
+        bali();
+        break;
+    case 7:
+        cout<<"Terimakasih Telah Menggunakan Aplikasi Ini";
+	}
+}
+void input()
+{
+    cout<<" Masukan Banyaknya buku yang akan diinputkan : "; cin>>a;
+		for(b=0; b<a; b++){
+			cout<<" Masukan data buku ke- "<<b+1<<endl;
+			cout<<" Kode buku\t ";
+			cin>>z[b].kodeB;
+			cout<<" Judul buku\t ";
+			cin>>z[b].judul;
+			cout<<" Jumlah buku\t ";
+			cin>>z[b].stock;
+		}
+		system("cls");
+		menu();
+}
+void book()
+{
+	cout<<" ======================Daftar Buku=====================\n";
+	cout<<" | Kode Buku\t| Judul Buku | Jumlah | \n";
+	for(b=0; b<a; b++){cout<<" |\t"<<z[b].kodeB<< "\t| "<<z[b].judul<<"\t\t|\t" <<z[b].stock<<endl;}
+	cout<<endl;
+	menu();
+}
+void daf()
+{
+    for(d=c; d<c+1; d++){
+		cout<<" Kode Peminjaman (angka): ";
+		cin>>y[d].kodeP;
+		cout<<" Nama : ";
+		cin>>y[d].nama;
+		cout<<" Nomor Telepon : ";
+		cin>>y[d].tlp;
+		cout<<endl;
+	}
+	c=c+1;
+	k=c;
+	cout<<" Ingin menginputkan data lagi? (y/n) : "; cin>>status;
+	if(status=='Y'||status=='y'){
+    daf();
+    }else{system("cls");
+    menu();
+    }
+}
+void data()
+{
+	cout<<" ==================Data Nama Anggota===================\n";
+	cout<<" | Kode Peminjaman\t| Nama | No. Telepon | \n";
+	for(d=0; d<c; d++){
+    cout<<" |\t"<<y[d].kodeP<<"\t| "<<y[d].nama <<"\t\t|\t"<< y[d].tlp<<endl;
+    }
+	menu();
+}
+void pjm()
+{
+	for(f=e; f<e+1; f++){
+		cout<<" Nomor Peminjaman : ";
+		cin>>x[f].noPinjam;
+		cout<<" Kode Peminjam : ";
+		cin>>x[f].kp;
+		for(d=0;d<c-1;d++){
+			if(y[d].kodeP==x[f].kp){
+				cout<<" Nama peminjam : "<<y[d].nama<<endl;
+				break;
+			}else{
+			cout<<" Data tidak ditemukan "<<endl;
+			cout<<" Ingin menginputkan data lagi? (y/n) : "; cin>>status;
+	if(status=='Y'||status=='y'){
+		pjm();
+	}else{
+	system("cls");
+	menu();
+	}			}
+		}
+		cout<<" Kode buku : "; cin>>x[f].kb;
+		for(b=0; b<a; b++){
+			if(z[b].kodeB==x[f].kb){
+				cout<<" Judul buku : "<<z[b].judul<<endl;
+				break;
+			}else{
+				cout<<" Data tidak ditemukan "<<endl;
+                pjm();
+
+			}
+		}
+		cout<<" Tanggal Pinjam : ";
+		cin>>x[f].tglP;
+		tglbalik();
+		cout<<" Tanggal Kembali : "<<l;
+		cout<<endl;
+	}
+	cout<<" Ingin menginputkan data lagi? (y/n) : "; cin>>status;
+	if(status=='Y'||status=='y'){
+        pjm();
+	}else{
+		e=e+1;
+		system("cls");
+		menu();
+	}
+}
+void bali()
+{
+	cout<<" Masukan kode peminjam : ";
+	cin>>balik;
+	for(f=0; f<e; f++)
+		if(x[f].kp==balik){
+			cout<<" Kode buku : "<<x[f].kb<<endl;
+			cout<<" Tanggal Pinjam : "<<x[f].tglP<<endl;
+			cout<<" Tanggal Kembali : "<<l<<endl;
+		}
+            cout<<" Tanggal Real : ";
+            cin>>tgll;
+            if(tgll<=l){
+            cout<<" Tepat waktu ";
+            }else if(tgll>l){
+            denda();
+            cout<<" Kamnu Terkena Denda : "<<m;
+            }
+			//bali();
+        //}
+		cout<<endl;
+		menu();
+}
+
+void denda()
+{
+    m = ((tgll - l) * z[b].stock * 1000);
+}
+
+void tglbalik()
+{
+    if(x[f].tglP>=24){
+        l=(x[f].tglP+7)-30;
+    }else if(x[f].tglP<24){
+        l=x[f].tglP+7;
+        }
+}
